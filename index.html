@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heartstrings</title>
+<meta name="description" content="Heartstrings is a connection platform. Thirteen months in live operation, built with no funding and no paid acquisition. Pre-seed round open.">
+<meta property="og:title" content="Heartstrings">
+<meta property="og:description" content="A connection platform. Thirteen months live, no funding, no paid acquisition.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#100C0B;
+    --ink-raised:#181110;
+    --candle:#E9DCC9;
+    --candle-dim:#96877A;
+    --candle-faint:#5C5149;
+    --thread:#B32B26;
+    --rule:rgba(233,220,201,0.10);
+    --measure:38rem;
+  }
+
+  *{box-sizing:border-box}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--candle);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.65;
+    letter-spacing:0.005em;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* candlelight: a single warm source, top left, very low */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(60rem 44rem at 18% -6%, rgba(196,138,72,0.13), transparent 62%),
+      radial-gradient(44rem 40rem at 92% 108%, rgba(179,43,38,0.07), transparent 60%);
+    z-index:0;
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    max-width:calc(var(--measure) + 9rem);
+    margin:0 auto;
+    padding:0 1.6rem 6rem 1.6rem;
+  }
+
+  /* ---- the thread: one continuous red line down the left of the column ---- */
+  .thread{
+    position:absolute;
+    left:1.6rem;
+    top:0;
+    bottom:6rem;
+    width:1px;
+    background:linear-gradient(to bottom,
+      rgba(179,43,38,0) 0,
+      var(--thread) 5rem,
+      var(--thread) calc(100% - 9rem),
+      rgba(179,43,38,0) 100%);
+    transform-origin:top center;
+    animation:draw 2.4s cubic-bezier(.19,1,.22,1) both;
+  }
+  @keyframes draw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+  .col{
+    max-width:var(--measure);
+    margin-left:3.4rem;
+  }
+
+  /* ---- knots on the thread mark each anchor ---- */
+  .block{
+    position:relative;
+    padding-top:4.6rem;
+  }
+  .block::before{
+    content:"";
+    position:absolute;
+    left:calc(-3.4rem - 3px);
+    top:5.4rem;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--thread);
+    box-shadow:0 0 0 5px var(--ink), 0 0 14px rgba(179,43,38,0.7);
+    opacity:0;
+    animation:knot .8s ease-out forwards;
+    animation-delay:1.5s;
+  }
+  @keyframes knot{to{opacity:1}}
+
+  .block:nth-of-type(2)::before{animation-delay:1.75s}
+  .block:nth-of-type(3)::before{animation-delay:2s}
+  .block:nth-of-type(4)::before{animation-delay:2.25s}
+  .block:nth-of-type(5)::before{animation-delay:2.5s}
+
+  /* ---- masthead ---- */
+  header{
+    padding-top:5.5rem;
+    margin-left:3.4rem;
+    max-width:var(--measure);
+  }
+
+  .wordmark{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.72rem;
+    font-weight:500;
+    letter-spacing:0.42em;
+    text-transform:uppercase;
+    color:var(--candle);
+    margin:0;
+  }
+
+  .line{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;
+    font-size:clamp(2rem,6.2vw,3.05rem);
+    line-height:1.14;
+    letter-spacing:-0.012em;
+    margin:2.6rem 0 0 0;
+    text-wrap:balance;
+  }
+  .line em{
+    font-style:italic;
+    color:#C9473F;
+  }
+
+  .standfirst{
+    margin:2rem 0 0 0;
+    color:var(--candle-dim);
+    max-width:30rem;
+  }
+
+  /* ---- typography inside blocks ---- */
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.66rem;
+    font-weight:500;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--candle-faint);
+    margin:0 0 1.5rem 0;
+  }
+
+  p{margin:0 0 1.15rem 0}
+  p:last-child{margin-bottom:0}
+
+  strong{font-weight:500;color:#F2E7D8}
+
+  /* ---- the record ---- */
+  .record{
+    margin:0;
+    border-top:1px solid var(--rule);
+  }
+  .row{
+    display:flex;
+    align-items:baseline;
+    gap:1.4rem;
+    padding:1.15rem 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .figure{
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:500;
+    font-size:1.02rem;
+    color:#F2E7D8;
+    flex:0 0 7.4rem;
+    letter-spacing:-0.01em;
+  }
+  .label{
+    color:var(--candle-dim);
+    font-size:0.95rem;
+    line-height:1.5;
+  }
+
+  .note{
+    margin-top:1.6rem;
+    font-size:0.86rem;
+    line-height:1.6;
+    color:var(--candle-faint);
+  }
+
+  /* ---- contact ---- */
+  .contact{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:clamp(1.35rem,3.6vw,1.7rem);
+    line-height:1.3;
+    margin:1.7rem 0 0 0;
+  }
+
+  a{
+    color:var(--candle);
+    text-decoration:none;
+    border-bottom:1px solid var(--thread);
+    padding-bottom:1px;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  a:hover{color:#E4645B;border-bottom-color:#E4645B}
+  a:focus-visible{
+    outline:2px solid #E4645B;
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  footer{
+    margin-left:3.4rem;
+    max-width:var(--measure);
+    margin-top:5rem;
+    padding-top:1.7rem;
+    border-top:1px solid var(--rule);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:0.7rem;
+    letter-spacing:0.09em;
+    line-height:2.1;
+    color:var(--candle-faint);
+    text-transform:uppercase;
+  }
+  footer a{border-bottom-color:var(--candle-faint)}
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    .thread{left:0.95rem}
+    .col,header,footer{margin-left:2.1rem}
+    .block::before{left:calc(-2.1rem - 3px)}
+    .row{flex-direction:column;gap:0.25rem}
+    .figure{flex:none}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .thread,.block::before{animation:none;transform:none;opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="thread" aria-hidden="true"></div>
+
+  <header>
+    <p class="wordmark">Heartstrings</p>
+    <h1 class="line">The internet used to be a place where you met people. Then it became a place where you <em>rated</em> them.</h1>
+    <p class="standfirst">Heartstrings is a connection platform. We are building the half of the category nobody has fixed: not who you meet, but what happens after.</p>
+  </header>
+
+  <div class="col">
+
+    <section class="block">
+      <p class="eyebrow">What exists</p>
+      <p>For thirteen months Heartstrings ran as a live product inside Discord. People arrived through game communities, passed a live voice verification with a human before they could use anything, and were introduced to each other by a matching engine rather than handed a list to scroll.</p>
+      <p>It ran in production for thirteen months without going down. It was built and operated by one person, with <strong>no funding, no paid acquisition, and no marketing budget of any kind</strong>. Every user, every match and every dollar was earned.</p>
+    </section>
+
+    <section class="block">
+      <p class="eyebrow">The record</p>
+      <div class="record">
+        <div class="row"><span class="figure">6,168</span><span class="label">audited join events</span></div>
+        <div class="row"><span class="figure">1,962</span><span class="label">people passed a live voice verification with a human admin</span></div>
+        <div class="row"><span class="figure">614</span><span class="label">of those hold a profile today</span></div>
+        <div class="row"><span class="figure">983</span><span class="label">matches, every one authenticated against the platform's own delivery records</span></div>
+        <div class="row"><span class="figure">$1,345</span><span class="label">net earned before any raise opened, with nothing bought</span></div>
+      </div>
+      <p class="note">Product data as of 19 June 2026. Revenue data as of 26 July 2026. Acquisition data as of 1 August 2026. The three captures do not see each other and are not reconciled across. Full methodology, retention curves and monetisation detail are in the data appendix, available under NDA.</p>
+    </section>
+
+    <section class="block">
+      <p class="eyebrow">How we handle our own numbers</p>
+      <p>Every figure above is reconciled against raw payment and database exports, row by row. Where a number has been wrong, the correction is published with the old value, the new value, and the direction it ran.</p>
+      <p>That includes the corrections that were flattering us. We revised our own lifetime payer count down from 219 to 73, and the share of users who ever matched down from 97.4% to 68.5%, before anyone asked. <strong>A ledger that only ever flatters is not a ledger.</strong></p>
+    </section>
+
+    <section class="block">
+      <p class="eyebrow">Where this is going</p>
+      <p>The Discord year proved the connection layer and the trust layer. It did not prove the game layer, and that is the open bet. Heartstrings Connect is the standalone platform: verification, introductions and a library of small co-operative games built to be played by two people who have just met.</p>
+      <p>What kills every subscription product in this category is that a matching service gives you no reason to come back once it works. A library does. That is the thesis, and it is a thesis rather than a result.</p>
+    </section>
+
+    <section class="block">
+      <p class="eyebrow">The round</p>
+      <p>Heartstrings is raising a <strong>$1M pre-seed on a SAFE</strong>, for eighteen months of runway to a shipped app, a first season of games, and the first measured cost of acquisition in the company's history.</p>
+      <p class="contact">Ankit Jingala<br><a href="mailto:ankitjingalaji@gmail.com">ankitjingalaji@gmail.com</a></p>
+    </section>
+
+  </div>
+
+  <footer>
+    Heartstrings &middot; 2026<br>
+    The live community is at <a href="https://www.patreon.com/c/heartstringsdiscord/about">patreon.com/heartstringsdiscord</a><br>
+    Data room and appendix available to investors under NDA
+  </footer>
+</div>
+
+</body>
+</html>
