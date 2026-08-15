@@ -305,6 +305,7 @@ section > *{ grid-column:2; }
   text-transform:uppercase; color:var(--ink); margin:0 0 .5rem;
 }
 .record .denom{ margin:0; font-size:.94rem; line-height:1.62; color:var(--ink-3); }
+.record .denom + .denom{ margin-top:.85em; }
 
 .asof{
   margin-top:clamp(2.4rem,5vh,3.6rem);
@@ -722,8 +723,13 @@ footer .grp{ display:flex; flex-wrap:wrap; gap:1.4rem 2rem; align-items:center; 
           <p class="what">Lifetime matches</p>
           <p class="denom">
             Reconstructed from the record of notifications the platform itself sent, not
-            from anyone's conversations. It can only undercount, so it is a floor. Every
-            archived record is authenticated against the messaging platform's own message
+            from anyone's conversations. It can only undercount, so it is a floor.
+          </p>
+          <p class="denom">
+            Both people in a match are notified, so one event writes two mirrored records.
+            The archive's 1,522 records collapse to 1,115 notifications across 983 distinct
+            matches, and the 407 collapsed duplicates are reported rather than quietly
+            dropped. All of them authenticate against the messaging platform's own message
             identifier, 1,522 of 1,522.
           </p>
         </dd>
